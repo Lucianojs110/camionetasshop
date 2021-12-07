@@ -16,18 +16,19 @@
 					</div>
 				</div>
 				</br>
+				<div class="table-responsive">
 				<table class="table table-striped table-bordered table-hover" id="example">
 					<thead>
 						<th>Nombre Completo</th>
 						<th>Email</th>
 						<th>Rol</th>
+						<th>Acciones</th>
 					</thead>
 					@foreach($users as $user)
 					<tr>
-
 						<td>{{ $user->name }}</td>
 						<td>{{ $user->email }}</td>
-                        <td>{{ $user->rol }}</td>
+                        <td>{{ $user->role }}</td>
 						<td align="center">
 							<form method="post" action="{{ URL::action('UsersController@destroy', $user->id) }}">
 								@method('delete')
@@ -47,6 +48,7 @@
 					</tr>
 					@endforeach
 				</table>
+				</div>	
 			</div>
 		</div>
 	</div>

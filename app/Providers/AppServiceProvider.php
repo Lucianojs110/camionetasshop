@@ -23,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+         //en produccion con https habitar el forceScheme
+        // \Illuminate\Support\Facades\URL::forceScheme('https');
     }
 }
