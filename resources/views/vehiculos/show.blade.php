@@ -207,25 +207,7 @@
 
     
                     
-                <div class="form-body">
-                    <h3 class="card-title">Listado de Filtros</h3>
-                    <hr>          
-                    <div class="row justify-content-left align-items-left">
-                        <div class="col-md-4 form-group">
-                            <select class="form-control" {{-- multiple="multiple" --}} id="filtroslista" name="filtroslista" disabled>
-                                @foreach ($filtros as $f)
-                                            <option value="{{ $f->id_filtro }}"{{ (collect(old('filtros'))->contains($f->id_filtro)) ? 'selected':'' }}>{{ $f->id_filtro }} {{-- -> --}} {{ $f->descripcion }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="agregar" class="form-check-label"></label>
-                            <a class="btn btn-success" name="agregar" id="agregar" onclick="agregar()">
-                                Agregar
-                            </a>
-                        </div>
-                    </div> 
-                </div>
+             
 
                 <div class="form-group col-md-8" id="listado" name="listado">
                     <div class="col-md-6">
@@ -246,7 +228,7 @@
 
 @endsection
 
-@push('scripts')
+@section('js')
 	<script>
 		window.onload = iniciar();
         
@@ -259,8 +241,8 @@
 				valor = element.id_filtro;
 				nombre_filtro = element.descripcion;
                 
-				$("#listado").append("<div class='form-group col-md-3'><label for='filtros' class='form-check-label'>Filtros (*)</label><input type='text' class='form-control' disabled value='"+nombre_filtro+"'></div><div class='form-group col-md-3'><label for='descripcion' class='form-check-label'>Atributo (*)</label><input type='text'class='form-control montoinput' value='"+element.pivot.descripcion+"' disabled></div>");
-
+				$("#listado").append("<div class='row' id='div_" + cant + "'><div class='col-md-4'><label for='filtro' class='form-check-label'>Filtros (*)</label><input type='text' class='form-control' disabled value='"+nombre_filtro+"'></div><div class='form-group col-md-3'><label for='descripcion' class='form-check-label'>Atributo (*)</label><input type='text'class='form-control montoinput' value='"+element.pivot.descripcion+"' disabled></div>");
+                //$("#listado").append("<div class='row' id='div_" + cant + "'><div class='col-md-4'><label for='filtro' class='form-check-label'>Filtro</label><input class='form-control' type='text' name='filtros[]' id='filtro" + cant + "'  disabled value='" + nombre_filtro + "'><input type='text' name='valor[]' id='valor" + cant + "' style='display: none;' value='" + valor + "'></div><div class='col-md-4'><label for='atributos' class='form-check-label'>Atributo(*)</label><input class='form-control' type='text' name='atributos[]' id='atributos" + cant + "' required></div><div class='col-md-4'><label for='agregar' class='form-check-label'></label><br><a class='btn btn-danger' name='remover' id='remover" + cant + "' onclick='quitar(" + cant + ")'>Quitar</a></div>");
 				cant = $('#listado').children('div').length-2;
 
                
@@ -271,4 +253,4 @@
 	</script>
   
 
-@endpush
+  @endsection
