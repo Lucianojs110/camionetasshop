@@ -127,7 +127,7 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-light-primary elevation-4',
+    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -146,7 +146,7 @@ return [
     */
 
     'sidebar_mini' => 'lg',
-    'sidebar_collapse' => false,
+    'sidebar_collapse' => true,
     'sidebar_collapse_auto_size' => false,
     'sidebar_collapse_remember' => false,
     'sidebar_collapse_remember_no_transition' => true,
@@ -241,20 +241,26 @@ return [
         ['header' => 'ADMINISTRACIÓN VEHICULOS'],
         [
             'text'        => 'Vehiculos',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
+            'url'         => 'vehiculos',
+            'icon'        => 'fas fa-car', 
             'label_color' => 'success',
         ],
         [
             'text'        => 'Clientes',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
+            'url'         => 'clientes',
+            'icon'        => 'fas fa-users',
             'label_color' => 'success',
         ],
         [
             'text'        => 'Filtros',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
+            'url'         => 'filtros',
+            'icon'        => 'fas fa-filter',
+            'label_color' => 'success',
+        ],
+        [
+            'text'        => 'Categorías',
+            'url'         => 'categorias',
+            'icon'        => 'fas fa-list',
             'label_color' => 'success',
         ],
         ['header' => 'ADMINISTRACION CUENTAS'],
@@ -264,9 +270,9 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'Roles',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'text' => 'Usuarios',
+            'url'  => 'usuarios',
+            'icon' => 'fas fa-fw fa-users',
         ],
         /*
         [
@@ -362,7 +368,7 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
@@ -382,7 +388,7 @@ return [
             ],
         ],
         'Select2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
@@ -407,7 +413,7 @@ return [
             ],
         ],
         'Sweetalert2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
@@ -428,6 +434,22 @@ return [
                     'type' => 'js',
                     'asset' => false,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
+                ],
+            ],
+        ],
+
+        'Toastr' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => 'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => 'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js',
                 ],
             ],
         ],

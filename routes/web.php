@@ -19,4 +19,18 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::group(['middleware' => 'auth'], function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('categorias', 'CategoriasController');
+
+Route::resource('usuarios', 'UsersController');
+
+Route::resource('filtros', 'FiltrosController');
+
+Route::resource('clientes', 'ClientesController');
+
+Route::resource('vehiculos', 'VehiculosController');
+//Eliminar Imagenes
+Route::get('productosRemove/{id}','VehiculosController@destroy_img')->name('deleteimage');
+});
