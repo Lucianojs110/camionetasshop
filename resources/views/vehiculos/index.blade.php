@@ -1,6 +1,23 @@
 @extends('adminlte::page')
 @section ('content')
 
+<style>
+	.texto-resaltado{
+	color: white;
+	background-color: #f1663e;
+	padding: 5px;
+	font-size: 13px;	
+}
+.texto-destacado{
+	color: white;
+	background-color: green;
+	padding: 5px;
+	font-size: 13px;
+}
+
+
+</style>
+
 				<div class="row mt-2">
                     <div class="col-12">
                         <!-- Column -->
@@ -22,12 +39,13 @@
 										<th>Id</th>
 										<th>Imagen</th>
 										<th>Categoría</th>
-										<th>Marca</th>
-										<th>Modelo</th>
+										<th>Marca / Mod.</th>
+										
 										<th>Versión</th>
 										<th>Año</th>
-										<th>Provincia</th>
-										<th>Ciudad</th>
+										<th>Ubicacion</th>
+										<th></th>
+										<th></th>
 										<th>Acciones</th>
 									</thead>
 									@foreach($producto as $p)
@@ -39,12 +57,24 @@
 												@endif
 											@endforeach	
 											<td>{{ $p->categoria->nombre }}</td>
-											<td>{{ $p->marca }}</td>
-											<td>{{ $p->modelo }}</td>
+											<td>{{ $p->marca }} - {{ $p->modelo }}</td>
 											<td>{{ $p->version }}</td>
 											<td>{{ $p->año }}</td>
-											<td>{{ $p->provincia }}</td>
-											<td>{{ $p->ciudad }}</td>
+											<td>{{ $p->ciudad }}-{{ $p->provincia }}</td>
+											<td>
+											@if($p->envio == 1)
+											<div class="texto-resaltado">Envío</div>
+											@else
+											<div></div>
+											@endif
+											</td>
+											<td>
+											@if($p->destacado == 1)
+											<div class="texto-destacado">Destacado</div>
+											@else
+											<div></div>
+											@endif
+											</td>
 											<td align="center" style="width: 20%">
 												<form method="post" action="{{ URL::action('VehiculosController@destroy', $p->id_vehiculo) }}">
 													@method('delete')

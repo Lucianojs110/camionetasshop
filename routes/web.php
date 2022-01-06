@@ -14,12 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Redirect::route('shop.index');;
 });
+
+Route::get('/', [App\Http\Controllers\ProductosController::class, 'index']);
 
 Auth::routes();
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('categorias', 'CategoriasController');
@@ -33,4 +36,13 @@ Route::resource('clientes', 'ClientesController');
 Route::resource('vehiculos', 'VehiculosController');
 //Eliminar Imagenes
 Route::get('productosRemove/{id}','VehiculosController@destroy_img')->name('deleteimage');
+
 });
+
+//Route::get('/shop', [App\Http\Controllers\ProductosController::class, 'index'])->name('shop');
+//Route::get('/show/{$id}', [App\Http\Controllers\ProductosController::class, 'show'])->name('show');
+
+Route::resource('/shop', 'ProductosController');
+
+//Buscador de productos
+Route::post('buscador/', 'ProductosController@buscador')->name('busca');

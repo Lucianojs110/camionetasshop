@@ -1,6 +1,21 @@
 @extends('adminlte::page')
 @section ('content')
-
+<style>
+input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  padding: 20px;
+  margin-right: 20px;
+}
+.form-check-label{
+    margin-right: 10px;
+    margin-left: 10px;
+}
+</style>
 <br>
 <div class="row">
     <div class="col-lg-12">
@@ -126,6 +141,15 @@
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                 <div class="form-group">
                                     <div class="form-group">
+                                        <label for="precio" class="form-check-label">Precio cliente</label>
+                                        <input type="number" name="precio_cliente" id="precio-cliente" value="{{ $repuesto->precio_cliente }}" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="form-group">
+                                    <div class="form-group">
                                         <label for="precio" class="form-check-label">Motor</label>
                                         <input type="text" name="motor" id="motor" value="{{ $repuesto->motor }}" class="form-control" required>
                                     </div>
@@ -141,7 +165,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                 <div class="form-group">
                                     <label for="id_categoria" class="form-check-label">Provincia</label>
                                     <select name="provincia" id="id_categoria" class="form-control selectpicker" data-live-search="true">
@@ -173,7 +197,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label for="ciudad" class="form-check-label">Ciudad</label>
@@ -187,6 +211,24 @@
                                     <div class="form-group">
                                         <label for="descripcion" class="form-check-label">Descripción</label>
                                         <textarea name="descripcion" id="descripcion" cols="30" rows="5" class="form-control">{{$repuesto->descripcion}}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label for="envio"  class="form-check-label">Envio</label>
+                                        <input type="checkbox"  name="envio" data-plugin="switchery" data-color="#1bb99a" <?= $repuesto->envio == '1' ? 'Checked' : '' ?>>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label for="destacados"  class="form-check-label">Desctacado</label>
+                                        <input type="checkbox" name="destacado" data-plugin="switchery" data-color="#1bb99a" <?= $repuesto->destacado == '1' ? 'Checked' : '' ?>>
                                     </div>
                                 </div>
                             </div>

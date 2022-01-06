@@ -188,7 +188,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'admin/home',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -241,37 +241,37 @@ return [
         ['header' => 'ADMINISTRACIÓN VEHICULOS'],
         [
             'text'        => 'Vehiculos',
-            'url'         => 'vehiculos',
+            'url'         => 'admin/vehiculos',
             'icon'        => 'fas fa-car', 
             'label_color' => 'success',
         ],
         [
             'text'        => 'Clientes',
-            'url'         => 'clientes',
+            'url'         => 'admin/clientes',
             'icon'        => 'fas fa-users',
             'label_color' => 'success',
         ],
         [
             'text'        => 'Filtros',
-            'url'         => 'filtros',
+            'url'         => 'admin/filtros',
             'icon'        => 'fas fa-filter',
             'label_color' => 'success',
         ],
         [
             'text'        => 'Categorías',
-            'url'         => 'categorias',
+            'url'         => 'admin/categorias',
             'icon'        => 'fas fa-list',
             'label_color' => 'success',
         ],
         ['header' => 'ADMINISTRACION CUENTAS'],
         [
             'text' => 'Perfil',
-            'url'  => 'admin/settings',
+            'url'  => 'admin/perfil',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'Usuarios',
-            'url'  => 'usuarios',
+            'url'  => 'admin/usuarios',
             'icon' => 'fas fa-fw fa-users',
         ],
         /*

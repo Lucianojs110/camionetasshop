@@ -5,6 +5,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\NewUserRequest;
+use App\Http\Requests\UserEditRequest;
 use Session;
 
 
@@ -25,6 +26,15 @@ class UsersController extends Controller
         return view ('users.new');
     }
 
+    public function edit($id, Request $request)
+    {
+        
+        $user = User::findOrFail($id);
+        
+        
+        return view ('users.edit', ['user'=>$user]);
+    }
+
 
     public function store(NewUserRequest $request)
     {
@@ -37,8 +47,26 @@ class UsersController extends Controller
 
         
         Session::flash('success', 'Usuario Agregado con exito');
-        return redirect('/usuarios');
+        return redirect('admin/usuarios');
 
+    }
+
+    public function update(UserEditRequest $request, $id)
+    {
+        $usuario = User::findOrFail($id);
+
+        $usuario->name = request('name');
+        $usuario->email = request('email');
+        $usuario->role = request('role');
+        $pass = $request->get('password');
+        if ($pass != null) {
+            $usuario->password = bcrypt($request->get('password'));
+        } else {
+            unset($usuario->password);
+        }
+        $usuario->update();
+        Session::flash('success', 'Usuario actualizado con exito');
+        return redirect('admin/usuarios');
     }
 
     public function destroy($id)
@@ -46,7 +74,7 @@ class UsersController extends Controller
         $usuario = User::FindOrFail($id);
         $usuario->delete();
         Session::flash('success', 'Usuario eliminado con exito');
-        return redirect('/usuarios');
+        return redirect('admin/usuarios');
     }
 
 

@@ -7,7 +7,7 @@
 		<!-- Column -->
 		<div class="card mt-3">
 			<div class="card-header" style="background-color:#909497">
-				<h4 style="color:white">Listado de Categorías</h4>
+				<h4 style="color:white">Listado de Usuarios</h4>
 			</div>
 			<div class="card-body">
 				<div class="row">

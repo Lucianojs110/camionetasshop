@@ -27,6 +27,6 @@ class Categorias extends Model
 
 
     public function vehiculos(){
-        return $this->hasMany('App\Vehiculos', 'id_categoria', 'id_categoria');
+        return $this->hasMany('App\Models\Vehiculos', 'id_categoria', 'id_categoria');
     }
 }

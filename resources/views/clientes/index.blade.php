@@ -7,10 +7,11 @@
 	<div class="col-12">
 		<!-- Column -->
 		<div class="card mt-3">
-			<div class="card-body">
+			
 				<div class="card-header" style="background-color:#909497">
                 	<h4 style="color:white">Listado de Clientes</h4>
             	</div>
+				<div class="card-body">
 				<div class="row mt-2">
 					<div class="col-md-2">
 						<a href="{{URL::action('ClientesController@create')}}" class="btn btn-success btn-block btn-sm" title="Nuevo">Nuevo</a>

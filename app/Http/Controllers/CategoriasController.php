@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Categorias;
 use RealRashid\SweetAlert\Facades\Alert;
+use Session;
 
 
 use Redirect;
-use Session;
+
 
 class CategoriasController extends Controller
 {
@@ -44,8 +45,8 @@ class CategoriasController extends Controller
             'message' => 'La Categoria se cargo Correctamente', 
             'alert-type' => 'succes'
         );
-       
-        return redirect("/categorias")->with($notificacion);
+        Session::flash('success', 'Categoria Agregada con exito');
+        return redirect("admin/categorias")->with($notificacion);
     }
 
     
@@ -76,8 +77,8 @@ class CategoriasController extends Controller
             'message' => 'La Categoria fue modificada Correctamente', 
             'alert-type' => 'succes'
         );
-
-        return redirect("/categorias")->with($notificacion);
+        Session::flash('success', 'Categoria editada con exito');
+        return redirect("admin/categorias")->with($notificacion);
         
     }
 
@@ -91,6 +92,6 @@ class CategoriasController extends Controller
             'alert-type' => 'succes'
         );
 
-        return redirect("/categorias")->with($notificacion);
+        return redirect("admin/categorias")->with($notificacion);
     }
 }

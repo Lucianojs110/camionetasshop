@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cliente;
+use App\Models\Vehiculos;
 use Session;
 
 class ClientesController extends Controller
@@ -61,8 +62,8 @@ class ClientesController extends Controller
                 'message' => 'El cliente se cargo Correctamente', 
                 'alert-type' => 'succes'
             );
-            Session::flash('success', 'Registro Creado Correctamente');
-            return redirect("/clientes")->with($notificacion); 
+            Session::flash('success', 'Cliente Creado Correctamente');
+            return redirect("admin/clientes")->with($notificacion); 
     }
 
     /**
@@ -74,8 +75,12 @@ class ClientesController extends Controller
     public function show($id)
     {
         $clientes = Cliente::findOrfail($id);
+
+        $vehiculos = Vehiculos::where('id_cliente', '=', $id)->withTrashed()->get();
+
+        //dd($vehiculos);
         
-        return view("clientes.show",['clientes'=> $clientes]);
+        return view("clientes.show",['clientes'=> $clientes, 'vehiculos'=>$vehiculos]);
     }
 
     /**
@@ -118,8 +123,8 @@ class ClientesController extends Controller
             'message' => 'El cliente se modificó Correctamente', 
             'alert-type' => 'succes'
         );
-        Session::flash('success', 'Registro editado Correctamente');
-        return redirect("/clientes")->with($notificacion); 
+        Session::flash('success', 'Cliente editado Correctamente');
+        return redirect("admin/clientes")->with($notificacion); 
     }
 
     /**
@@ -138,6 +143,6 @@ class ClientesController extends Controller
             'alert-type' => 'succes'
         );
 
-        return redirect('/clientes')->with($notificacion);
+        return redirect('admin/clientes')->with($notificacion);
     }
 }

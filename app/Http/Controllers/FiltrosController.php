@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Filtros;
+use Session;
 
 class FiltrosController extends Controller
 {
@@ -40,8 +41,8 @@ class FiltrosController extends Controller
             'message' => 'El Filtro se cargo Correctamente', 
             'alert-type' => 'succes'
         );
-
-        return redirect("/filtros")->with($notificacion);
+        Session::flash('success', 'Filtro Agregado con exito');
+        return redirect("admin/filtros")->with($notificacion);
 
         
     }
@@ -78,8 +79,8 @@ class FiltrosController extends Controller
             'message' => 'El Filtro fue modificada Correctamente', 
             'alert-type' => 'succes'
         );
-
-        return redirect("/filtros")->with($notificacion);
+        Session::flash('success', 'Filtro editado con exito');
+        return redirect("admin/filtros")->with($notificacion);
     }
 
     
@@ -92,7 +93,7 @@ class FiltrosController extends Controller
             'alert-type' => 'succes'
         );
 
-        return redirect("/filtros")->with($notificacion);
+        return redirect("admin/filtros")->with($notificacion);
         
     }
 }

@@ -11,6 +11,7 @@ use App\Models\Categorias;
 use App\Models\Imagenes;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
+use Session;
 
 class VehiculosController extends Controller
 {
@@ -20,9 +21,7 @@ class VehiculosController extends Controller
 
         $producto = Vehiculos::with('imagenprincipal','categoria', 'cliente')->get();
        
-        //dd($clientes); 
       
-       
         return view('vehiculos.index', ['producto' => $producto]);
     }
 
@@ -46,8 +45,17 @@ class VehiculosController extends Controller
     {
 
        
-               
             $prod = new Vehiculos();
+            if($request->input('envio')){
+                $envio =  1;
+            }else{
+                $envio = 0;
+            }
+            if($request->input('destacado')){
+                $destacado =  1;
+            }else{
+                $destacado = 0;
+            }
             $prod-> fill([
                     'id_categoria'=> $request->input('id_categoria'),
                     'id_cliente'=> $request->input('id_cliente'),
@@ -63,8 +71,12 @@ class VehiculosController extends Controller
                     'ciudad' => $request->input('ciudad'),
                     'version' => $request->input('version'),
                     'descripcion' => $request->input('descripcion'),     
-                    'precio' => $request->input('precio')   
+                    'precio' => $request->input('precio'),
+                    'precio_cliente' => $request->input('precio_cliente'),
+                    'envio' => $envio,
+                    'destacado' => $destacado
             ]);
+            
             $prod->save();
 
             
@@ -113,9 +125,11 @@ class VehiculosController extends Controller
                 'message' => 'El vehiculo se cargo Correctamente', 
                 'alert-type' => 'succes'
             );
+
+            
            
-    
-        return redirect("/vehiculos")->with($notificacion); 
+        Session::flash('success', 'vehiculo Agregado con exito');
+        return redirect("admin/vehiculos")->with($notificacion); 
        
     }
 
@@ -151,6 +165,16 @@ class VehiculosController extends Controller
         $categorias = Categorias::get();
         $filtros = Filtros::get();
 
+        if($request->input('envio')){
+            $envio =  1;
+        }else{
+            $envio = 0;
+        }
+        if($request->input('destacado')){
+            $destacado =  1;
+        }else{
+            $destacado = 0;
+        }
 
         $prod-> fill([
             'id_categoria'=> $request->input('id_categoria'),
@@ -167,7 +191,10 @@ class VehiculosController extends Controller
             'ciudad' => $request->input('ciudad'),
             'version' => $request->input('version'),
             'descripcion' => $request->input('descripcion'),
-            'precio' => $request->input('precio')   
+            'precio' => $request->input('precio'),
+            'precio_cliente' => $request->input('precio_cliente'),
+            'envio' => $envio,
+            'destacado' => $destacado
         ]);
         $prod->save();
 
@@ -194,21 +221,21 @@ class VehiculosController extends Controller
                 
                 foreach($request->File('ruta') as $imagen){
                 
-                $img = new Imagenes();
-              
-                $img-> fill([
-                    'ruta' => 'storage/bm/'.$imagen->getClientOriginalName(),
-                ]); 
+                    $img = new Imagenes();
 
-                $img->vehiculo()->associate($prod->id_vehiculo)->first();
-            
-                $img->save();
-            
-                
-                Storage::putFileAs('storage/bm', $imagen, $imagen->getClientOriginalName());
-            
+                    $img-> fill([
+                        'ruta' => 'storage/bm/'.$imagen->getClientOriginalName(),
+                    ]); 
+
+                    $img->vehiculo()->associate($prod->id_vehiculo)->first();
+                    
+                    $img->save();
+                    
+                    //Storage::putFileAs('bm', $imagen, $imagen->getClientOriginalName());
+                    $imagen->move('storage/bm', $imagen->getClientOriginalName());
+               
                 }
-
+            
             }
    
 
@@ -218,8 +245,8 @@ class VehiculosController extends Controller
                 'alert-type' => 'succes'
             );
 
-
-            return redirect("/vehiculos")->with($notificacion); 
+            Session::flash('success', 'Vehiculo editado con exito');
+            return redirect("admin/vehiculos")->with($notificacion); 
 
 
     }
@@ -252,7 +279,7 @@ class VehiculosController extends Controller
             'alert-type' => 'succes'
         );
 
-        return redirect('/vehiculos')->with($notificacion);
+        return redirect('admin/vehiculos')->with($notificacion);
         
     }
 
@@ -276,7 +303,7 @@ class VehiculosController extends Controller
             'alert-type' => 'succes'
         );
 
-        return redirect("vehiculos/".$id_vehiculo."/edit")->with($notificacion);
+        return redirect("admin/vehiculos/".$id_vehiculo."/edit")->with($notificacion);
 
     }
 

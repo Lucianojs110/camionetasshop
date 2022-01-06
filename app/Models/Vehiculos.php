@@ -35,7 +35,10 @@ class Vehiculos extends Model
         'provincia',
         'ciudad',
         'descripcion',
-        'precio'
+        'precio',
+        'precio_cliente',
+        'envio',
+        'destacado'
     ];
 
 

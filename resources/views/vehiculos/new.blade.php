@@ -1,6 +1,20 @@
 @extends('adminlte::page')
 @section ('content')
-
+<style>
+input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  padding: 20px;
+  margin-right: 20px;
+}
+.form-check-label{
+    margin-right: 10px;
+}
+</style>
 <br>
 <div class="row">
     <div class="col-lg-12">
@@ -112,6 +126,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label for="precio" class="form-check-label">Precio cliente</label>
+                                        <input type="number" name="precio_cliente" id="precio-cliente" value="{{ old('precio_cliente') }}" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                 <div class="form-group">
@@ -131,7 +153,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                 <div class="form-group">
                                     <label for="id_categoria" class="form-check-label">Provincia</label>
                                     <select name="provincia" id="id_categoria" class="form-control selectpicker" data-live-search="true">
@@ -163,7 +185,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label for="ciudad" class="form-check-label">Ciudad</label>
@@ -182,16 +204,36 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
+                        
+                            <div class="col-md-6">
                                 <div class="row">
                                     <div class="form-group">
                                         <label for="ruta" class="form-check-label">Fotos (*)</label><br>
                                         <div class="col-md-6">
-                                            <input id="ruta" type="file" name="ruta[]" value="{{ old('ruta') }}" multiple accept="image/*">
+                                            <input id="ruta" required type="file" name="ruta[]" value="{{ old('ruta') }}" multiple accept="image/*">
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label for="envio"  class="form-check-label">Envio</label>
+                                        <input type="checkbox" name="envio" data-plugin="switchery" data-color="#1bb99a" >
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label for="destacados"  class="form-check-label">Desctacado</label>
+                                        <input type="checkbox" name="destacado" data-plugin="switchery" data-color="#1bb99a" >
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
@@ -215,6 +257,7 @@
                             </div>
                         </div>
                     </div>
+
 
                     <div class="form-group col-md-12" id="listado" name="listado">
                         <div class="col-md-6">
