@@ -52,7 +52,7 @@ input[type=checkbox]
                                 <div class="form-group">
                                     
                                         <label for="nombre" class="form-check-label">Marca (*)</label>
-                                        <input type="text" name="marca" id="marca" value="{{ old('marca') }}" class="form-control" required>
+                                        <input type="text" autocomplete="off" name="marca" id="marca" value="{{ old('marca') }}" class="form-control" required>
                                     
                                 </div>
                             </div>
@@ -61,7 +61,7 @@ input[type=checkbox]
                                 <div class="form-group">
                                    
                                         <label for="descripcion" class="form-check-label">Modelo (*)</label>
-                                        <input type="text" name="modelo" id="modelo" value="{{ old('modelo') }}" class="form-control" required>
+                                        <input type="text" name="modelo" autocomplete="off" id="modelo" value="{{ old('modelo') }}" class="form-control" required>
                                 
                                 </div>
                             </div>
@@ -70,7 +70,7 @@ input[type=checkbox]
                                 <div class="form-group">
                                    
                                         <label for="version" class="form-check-label">Version (*)</label>
-                                        <input type="text" name="version" id="version" value="{{ old('version') }}" class="form-control" required>
+                                        <input type="text" name="version" autocomplete="off" id="version" value="{{ old('version') }}" class="form-control" required>
                                 
                                 </div>
                             </div>
@@ -139,7 +139,7 @@ input[type=checkbox]
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label for="motor" class="form-check-label">Motor</label>
-                                        <input type="text" name="motor" id="motor" value="{{ old('motor') }}" class="form-control" required>
+                                        <input type="text" autocomplete="off" name="motor" id="motor" value="{{ old('motor') }}" class="form-control" required>
                                     </div>
                                 </div>
                             </div>

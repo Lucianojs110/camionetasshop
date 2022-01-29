@@ -29,6 +29,7 @@
 							<th>Ciudad</th>
 							<th>Dirección</th>
 							<th>Telefono</th>
+							<th>Acción</th>
 						</thead>
 						@foreach($clients as $p)
 						<tr>
@@ -38,6 +39,7 @@
 							<td>{{ $p->email }}</td>
 							<td>{{ $p->provincia }}</td>
 							<td>{{ $p->ciudad }}</td>
+							<td>{{ $p->direccion }}</td>
 							<td>{{ $p->telefono }}</td>
 							<td align="center">
 								<form method="post" action="{{ URL::action('ClientesController@destroy', $p->id_cliente) }}">

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,5 +26,7 @@ class AppServiceProvider extends ServiceProvider
     {
          //en produccion con https habitar el forceScheme
          //\Illuminate\Support\Facades\URL::forceScheme('https');
+
+         Paginator::useBootstrap();
     }
 }

@@ -2,7 +2,7 @@
 
 @section('title','Productos')
 
-@section('contentenido')
+@section('contenido')
 
 <section>
     <div class="container">
@@ -12,10 +12,7 @@
                 <div class="features_items">
                   
                     @include('parts.productos')
-                    
-                    <ul class="pagination">
-                        {{ $products->links() }}
-                    </ul>
+                   
                 </div>
             </div>
         </div>

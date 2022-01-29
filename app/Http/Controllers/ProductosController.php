@@ -8,6 +8,7 @@ use App\Models\Imagenes;
 use App\Models\Vehiculos;
 use App\Models\Filtros;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
 
 use Redirect;
 use Session;
@@ -18,27 +19,31 @@ class ProductosController extends Controller
     
     public function index()
     {
-        /* $productos  = Productos::with('categoria')->get(); */
-
-        /* dd($productos); */
+    
         $category = Categorias::with('vehiculos')->with('vehiculos.imagenprincipal')->get();
 
+    
         $categorias = $category->map(function($value){
-            $value->vehiculos = $value->vehiculos->take(10);
+            $value->vehiculos = $value->vehiculos->where('destacado', 1)->take(16);
 
             return $value;
         });
 
     
-        /*Union de tablas(Tramites-Empresas-Vehiculos_empresa) para la obtencion de los vehiculos */
-        $rep = DB::table('categorias')/*1er TABLA: Tramites */
-                            ->select('vehiculos.marca','vehiculos.id_categoria')
-                            ->where('categorias.created_at','!=', NULL)
-                            ->leftJoin('vehiculos', 'categorias.id_categoria', '=', 'vehiculos.id_categoria') /*2da TABLA: Empresas */
-                            ->get();  
+       
 
        return view('shop.index', ['categorias' => $categorias]);
     }
+
+    public function productos_all()
+    {
+        
+        $products = Vehiculos::with('imagenprincipal')->paginate(16);
+
+       return view('shop.productos_all', ['products' => $products]);
+    }
+
+
 
   
     public function show($id)
@@ -57,14 +62,17 @@ class ProductosController extends Controller
 
 
 
-    public function buscador(Request $request){
+    public function buscador($text){
         
 
-    
-        $vehiculos = Vehiculos::where('marca','like','%'.$request->texto.'%')
-        ->orWhere('modelo','like','%'.$request->texto.'%')    
-        ->orWhere('version','like','%'.$request->texto.'%')   
+        if($text != 'all'){
+        $vehiculos = Vehiculos::where('marca','like','%'.$text.'%')
+        ->orWhere('modelo','like','%'.$text.'%')    
+        ->orWhere('version','like','%'.$text.'%')   
         ->get();
+        }else{
+            $vehiculos = Vehiculos::get();
+        }
 
        
 

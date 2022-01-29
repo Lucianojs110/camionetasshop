@@ -4388,6 +4388,7 @@ input[type=submit].btn-block {
         -ms-flex-wrap: nowrap;
         flex-wrap: nowrap
     }
+   
     .navbar-expand-lg .navbar-collapse {
         display: -ms-flexbox !important;
         display: flex !important;

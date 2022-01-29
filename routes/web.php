@@ -37,6 +37,8 @@ Route::resource('vehiculos', 'VehiculosController');
 //Eliminar Imagenes
 Route::get('productosRemove/{id}','VehiculosController@destroy_img')->name('deleteimage');
 
+
+
 });
 
 //Route::get('/shop', [App\Http\Controllers\ProductosController::class, 'index'])->name('shop');
@@ -45,4 +47,6 @@ Route::get('productosRemove/{id}','VehiculosController@destroy_img')->name('dele
 Route::resource('/shop', 'ProductosController');
 
 //Buscador de productos
-Route::post('buscador/', 'ProductosController@buscador')->name('busca');
+Route::get('buscador/{text}', 'ProductosController@buscador');
+
+Route::get('products_all','ProductosController@productos_all')->name('products_all');

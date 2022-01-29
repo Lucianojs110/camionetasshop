@@ -1062,7 +1062,7 @@ h1, h2, h3, h4, h5, h6 {
           box-shadow: none;
           margin: 0px;
           background: #fff; }
-          @media (min-width: 992px) {
+          @media (min-width: 1200px) {
             .header_area .navbar .nav .nav-item.submenu ul {
               position: absolute;
               top: 140%;
@@ -1120,7 +1120,7 @@ h1, h2, h3, h4, h5, h6 {
             .header_area .navbar .nav .nav-item.submenu ul .nav-item:hover .nav-link {
               background: #ffba00;
               color: #fff; }
-        @media (min-width: 992px) {
+        @media (min-width: 1200px) {
           .header_area .navbar .nav .nav-item.submenu:hover ul {
             visibility: visible;
             opacity: 1; } }

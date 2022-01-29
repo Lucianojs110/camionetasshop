@@ -189,7 +189,7 @@ input[type=checkbox]
                                         <option value="San Juan" <?= $repuesto->provincia == 'San Juan' ? 'SELECTED' : '' ?>>San Juan</option>
                                         <option value="San Luis" <?= $repuesto->provincia == 'San Luis' ? 'SELECTED' : '' ?>>San Luis</option>
                                         <option value="Santa Cruz" <?= $repuesto->provincia == 'Santa Cruz' ? 'SELECTED' : '' ?>>Santa Cruz</option>
-                                        <option value="Santa Fe" <?= $repuesto->provincia == 'Buenos Aires' ? 'SELECTED' : '' ?>>Santa Fe</option>
+                                        <option value="Santa Fe" <?= $repuesto->provincia == 'Santa Fe' ? 'SELECTED' : '' ?>>Santa Fe</option>
                                         <option value="Santiago del Estero" <?= $repuesto->provincia == 'Santiago del Estero' ? 'SELECTED' : '' ?>>Santiago del Estero</option>
                                         <option value="Tierra del Fuego" <?= $repuesto->provincia == 'Tierra del Fuego' ? 'SELECTED' : '' ?>>Tierra del Fuego</option>
                                         <option value="Tucumán" <?= $repuesto->provincia == 'Tucumán' ? 'SELECTED' : '' ?>>Tucumán</option>
