@@ -1,20 +1,24 @@
 @extends('adminlte::page')
 @section ('content')
 <style>
-input[type=checkbox]
-{
-  /* Double-sized Checkboxes */
-  -ms-transform: scale(2); /* IE */
-  -moz-transform: scale(2); /* FF */
-  -webkit-transform: scale(2); /* Safari and Chrome */
-  -o-transform: scale(2); /* Opera */
-  padding: 20px;
-  margin-right: 20px;
-}
-.form-check-label{
-    margin-right: 10px;
-    margin-left: 10px;
-}
+    input[type=checkbox] {
+        /* Double-sized Checkboxes */
+        -ms-transform: scale(2);
+        /* IE */
+        -moz-transform: scale(2);
+        /* FF */
+        -webkit-transform: scale(2);
+        /* Safari and Chrome */
+        -o-transform: scale(2);
+        /* Opera */
+        padding: 20px;
+        margin-right: 20px;
+    }
+
+    .form-check-label {
+        margin-right: 10px;
+        margin-left: 10px;
+    }
 </style>
 <br>
 <div class="row">
@@ -110,7 +114,7 @@ input[type=checkbox]
                                 </div>
                             </div>
 
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
                                 <div class="form-group">
                                     <label class="form-check-label">Uso</label>
                                     <select name="uso" id="uso" class="form-control">
@@ -128,6 +132,20 @@ input[type=checkbox]
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label for="moneda" class="form-check-label">Moneda (*)</label>
+                                        <select name="moneda" id="moneda" class="form-control">
+                                        
+                                        <option value="Dolares" <?= $repuesto->moneda == 'Dolares' ? 'SELECTED' : '' ?>>Dolares</option>
+                                        <option value="Pesos" <?= $repuesto->moneda == 'Pesos' ? 'SELECTED' : '' ?>>Pesos</option>
+                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+
 
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                 <div class="form-group">
@@ -210,7 +228,8 @@ input[type=checkbox]
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label for="descripcion" class="form-check-label">Descripción</label>
-                                        <textarea name="descripcion" id="descripcion" cols="30" rows="5" class="form-control">{{$repuesto->descripcion}}</textarea>
+                                        <textarea name="descripcion" class="form-control" id="summary-ckeditor" cols="30" rows="5" class="form-control">{{$repuesto->descripcion}}</textarea>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -218,8 +237,8 @@ input[type=checkbox]
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <div class="form-group">
-                                        <label for="envio"  class="form-check-label">Envio</label>
-                                        <input type="checkbox"  name="envio" data-plugin="switchery" data-color="#1bb99a" <?= $repuesto->envio == '1' ? 'Checked' : '' ?>>
+                                        <label for="envio" class="form-check-label">Envio</label>
+                                        <input type="checkbox" name="envio" data-plugin="switchery" data-color="#1bb99a" <?= $repuesto->envio == '1' ? 'Checked' : '' ?>>
                                     </div>
                                 </div>
                             </div>
@@ -227,11 +246,21 @@ input[type=checkbox]
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <div class="form-group">
-                                        <label for="destacados"  class="form-check-label">Desctacado</label>
+                                        <label for="destacados" class="form-check-label">Desctacado</label>
                                         <input type="checkbox" name="destacado" data-plugin="switchery" data-color="#1bb99a" <?= $repuesto->destacado == '1' ? 'Checked' : '' ?>>
                                     </div>
                                 </div>
                             </div>
+                            @can('Administrador')
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label for="activo" class="form-check-label">Activo</label>
+                                        <input type="checkbox" name="activo" data-plugin="switchery" data-color="#1bb99a" <?= $repuesto->activo == 'Activo' ? 'Checked' : '' ?>>
+                                    </div>
+                                </div>
+                            </div>
+                            @endcan
 
 
 
@@ -243,12 +272,16 @@ input[type=checkbox]
                                         <label for="ruta" class="form-check-label">Fotos (jpg, png)</label><br>
 
                                         @foreach($repuesto->imagenprincipal as $img)
-                                        <img src="/{{ $img['ruta'] }}" height="150px" width="210px" />
-
+                                  
                                         <!-- Botón para Eliminar la Imagen individualmente -->
-
-                                        <a class="btn btn-success" href="{{URL::route('deleteimage', $img->id_imagen)}}" onclick="return confirmarEliminar();" class="btn btn-success"><i class="fa fa-window-close"></i></a>
-
+                                        <div class="card" style="width: 18rem;">
+                                            <img class="card-img-top" src="/{{ $img['ruta'] }}" height="150px" width="210px" alt="Card image cap">
+                                            <div class="card-body">
+                                           
+                                                <span style="padding-right:10px"><a class="btn btn-success" href="{{URL::route('deleteimage', $img->id_imagen)}}" onclick="return confirmarEliminar();" class="btn btn-success"><i class="fa fa-window-close"></i></a></span>
+                                               
+                                            </div>
+                                        </div>
                                         @endforeach
 
 
@@ -315,11 +348,12 @@ input[type=checkbox]
 
     </form>
     @endsection
-
+    <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 
     @section('js')
 
     <script>
+         CKEDITOR.replace( 'summary-ckeditor' );
         $('#id_cliente').select2({
             placeholder: "Cliente"
         });
@@ -327,7 +361,9 @@ input[type=checkbox]
 
         function iniciar() {
             //toArray():convierte una colleccion en un array y json transforma un array comun en un array (clave-valor) de objetos
-            listado = {!! json_encode($repuesto->toArray()) !!}.filtro    //.filtro de la relacion repuesto->with('filtro') en show()
+           // listado = {
+            //    !!json_encode($repuesto - > toArray())!!
+            //}.filtro //.filtro de la relacion repuesto->with('filtro') en show()
 
             listado.forEach(function(element) {
                 cant = $('#listado').children('div').length - 2;

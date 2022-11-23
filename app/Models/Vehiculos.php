@@ -38,7 +38,11 @@ class Vehiculos extends Model
         'precio',
         'precio_cliente',
         'envio',
-        'destacado'
+        'destacado',
+        'id_usuario',
+        'moneda',
+        'activo'
+
     ];
 
 
@@ -48,6 +52,10 @@ class Vehiculos extends Model
 
     public function cliente(){
         return $this->belongsTo('App\Models\Cliente', 'id_cliente', 'id_cliente');
+    }
+
+    public function usuario(){
+        return $this->belongsTo('App\Models\User', 'id_usuario', 'id');
     }
 
   

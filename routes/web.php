@@ -37,16 +37,27 @@ Route::resource('vehiculos', 'VehiculosController');
 //Eliminar Imagenes
 Route::get('productosRemove/{id}','VehiculosController@destroy_img')->name('deleteimage');
 
+Route::get('profile', [App\Http\Controllers\UsersController::class, 'profile'])->name('profile');
 
+
+
+Route::put('/deshabilitar/{id}', [App\Http\Controllers\UsersController::class, 'deshabilitar'])->name('users.deshabilitar');
 
 });
 
 //Route::get('/shop', [App\Http\Controllers\ProductosController::class, 'index'])->name('shop');
 //Route::get('/show/{$id}', [App\Http\Controllers\ProductosController::class, 'show'])->name('show');
 
+Route::get('/registro', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('registro');
+Route::get('/registromsj', [App\Http\Controllers\Auth\RegisterController::class, 'registro_msj'])->name('registromsj');
 Route::resource('/shop', 'ProductosController');
 
 //Buscador de productos
 Route::get('buscador/{text}', 'ProductosController@buscador');
 
 Route::get('products_all','ProductosController@productos_all')->name('products_all');
+
+
+
+
+

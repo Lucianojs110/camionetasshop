@@ -76,17 +76,24 @@
                                         <div class="col-lg-6" style="padding:15px">
                                                 <div style="font-family:'Courier New'">
 
-                                                        <h3 style="color:#d43100; ">Us$
+                                                        <h3 style="color:#d43100; ">  
+                                                        @if($repuesto->moneda=='Pesos')
+								ARS$
+							@else
+								Us$
+							@endif
                                                                 <?php echo number_format($repuesto->precio, 0, ',', '.'); ?>
                                                         </h3>
                                                         <h5 style="font-family:'verdana'">Versión: {{$repuesto->version}}</h5>
                                                         <h5 style="color:#7F8C8D; font-family:'verdana'">Año: {{$repuesto->año}}</h5>
                                                         <h5 style="color:#7F8C8D; font-family:'verdana'">Combustible: {{$repuesto->combustible}}</h5>
+                                                        <h5 style="color:#7F8C8D; font-family:'verdana'">Motor: {{$repuesto->motor}}</h5>
                                                         <h5 style="color:#7F8C8D; font-family:'verdana'"> <?php echo number_format($repuesto->km, 0, ',', '.'); ?> Km</h5>
                                                         @foreach($repuesto->filtro as $f)
                                                         <h5 style="color:#7F8C8D; font-family:'verdana'"> {{$f->descripcion}}: {{$f->pivot->descripcion}}</h5>
                                                         @endforeach
-                                                        <h5 style="color:#7F8C8D; font-family:'verdana'"> {{$repuesto->descripcion}} </h5>
+                                                        <h5 style="color:#7F8C8D; font-family:'verdana'">  {!! $repuesto->descripcion !!} </h5>
+                                                       
                                                 </div>
                                         </div>
 

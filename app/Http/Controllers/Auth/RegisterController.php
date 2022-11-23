@@ -5,9 +5,14 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Validator;use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\RegisterPostRequest;
+use Session;
+
 
 class RegisterController extends Controller
 {
@@ -41,6 +46,37 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+
+    public function showRegistrationForm()
+    {
+        $roles = Role::all();
+        return view('auth.register', ['roles'=>$roles]);
+    }
+
+    public function registro_msj()
+    {
+       
+        return view('auth.registromsj');
+    }
+
+
+    public function register(RegisterPostRequest $request)
+    {
+        $usuario = new User();
+        $usuario->name = request('name');
+        $usuario->email = request('email');
+        $usuario->link = request('link');
+        $usuario->telefono = request('telefono');
+        $usuario->password = bcrypt(request('password'));
+        $usuario->estado = 0;
+        $usuario->save();
+        $usuario->asignarRol(request('role'));
+
+        
+        Session::flash('success', 'Usuario Agregado con exito');
+        return redirect('registromsj');
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -52,7 +88,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
 

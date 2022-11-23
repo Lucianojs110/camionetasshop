@@ -14,12 +14,17 @@
     @media screen and (max-width: 600px) {
 
         #prod {
-            margin-top: 140px;
+            margin-top: 80px;
         }
 
         #buscador2 {
             display: block;
             margin-top: 140px;
+        }
+
+        p {
+
+            padding-top: 30px;
         }
 
         @import "compass/css3";

@@ -35,33 +35,30 @@
 
             
             <div class="row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                     <label for="link">Link</label>
                     <input id="link" type="text" class="form-control" value="{{$user->link}}" name="link" placeholder="escribe el link">
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                     <label for="email">Telefóno</label>
                     <input id="telefono" type="text" class="form-control" value="{{$user->telefono}}" name="telefono" placeholder="escribe tu telefóno">
                 </div>
-                
-                <div class="form-group col-md-4">
+            </div>
+            @can('Administrador')
+
+            <div class="form-group col-md-4">
                     <label for="rol">Rol</label>
                     <select name="role" class="form-control">
-                        
                         <option selected disabled>Elige un rol para el usuario..</option>
                         @foreach($roles as $role)
-                        <option value='{{$role->id}}' <?= $user->role[0]['id'] == $role->id ? 'SELECTED' : '' ?>>{{$role->name}}</option>
+                        <option value='{{$role->id}}'  <?= $user->role[0]['id'] == $role->id ? 'SELECTED' : '' ?>>{{$role->name}}</option>
                         @endforeach
                     </select>
                     @if ($errors->has('rol'))
                     <span class="error text-danger" for="input-rol">{{ $errors->first('rol') }}</span>
                     @endif
                 </div>
-             
-            </div>
-
-
-      
+            @endcan
 
 
             <div class="row">

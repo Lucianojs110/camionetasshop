@@ -21,7 +21,7 @@
     </div>
     <div class="card-body">
 
-        <form action="{{url('usuarios')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('usuarios.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
 
@@ -35,6 +35,35 @@
                     <input type="email" class="form-control" name="email" value="{{old('email')}}" placeholder="escribe tu Email">
                 </div>
             </div>
+
+
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="link">Link</label>
+                    <input id="link" type="text" class="form-control" name="link" placeholder="escribe el link">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="email">Telefóno</label>
+                    <input id="telefono" type="text" class="form-control" name="telefono" placeholder="escribe tu telefóno">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="rol">Rol</label>
+                    <select name="role" class="form-control">
+                        <option selected disabled>Elige un rol para el usuario..</option>
+                        @foreach($roles as $role)
+                        <option value='{{$role->id}}'>{{$role->name}}</option>
+                        @endforeach
+                    </select>
+                    @if ($errors->has('rol'))
+                    <span class="error text-danger" for="input-rol">{{ $errors->first('rol') }}</span>
+                    @endif
+                </div>
+            </div>
+
+
+
 
 
             <div class="row">
@@ -51,16 +80,7 @@
 
 
 
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label for="rol">Rol</label>
-                    <select name="role" class="form-control">
-                        <option value='Administrador'>Administrador</option>
-                        <option value='Vendedor'>Vendedor</option>
-                    </select>
-                </div>
 
-            </div>
 
 
 

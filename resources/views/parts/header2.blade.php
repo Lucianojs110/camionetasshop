@@ -166,8 +166,7 @@
 
                         </li>
 
-                        <li class="nav-item"><a class="nav-link" href="contact.html" style="color:#db3300">Náuticos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contact.html" style="color:#db3300">Inmuebles</a></li>
+                        
                         <li class="nav-item"><a class="nav-link" href="contact.html" style="color:#db3300">Nosotros</a></li>
                         <li class="nav-item submenu dropdown">
 

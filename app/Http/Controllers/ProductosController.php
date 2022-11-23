@@ -20,17 +20,19 @@ class ProductosController extends Controller
     public function index()
     {
     
-        $category = Categorias::with('vehiculos')->with('vehiculos.imagenprincipal')->get();
+        $category = Categorias::with('vehiculos')->with('vehiculos.imagenprincipal' )
+        ->get();
 
     
         $categorias = $category->map(function($value){
-            $value->vehiculos = $value->vehiculos->where('destacado', 1)->take(16);
+            $value->vehiculos = $value->vehiculos->where('activo', 'Activo') 
+            ->sortByDesc('id_vehiculo')
+            ->take(24);
+            
 
             return $value;
         });
 
-    
-       
 
        return view('shop.index', ['categorias' => $categorias]);
     }
@@ -38,7 +40,10 @@ class ProductosController extends Controller
     public function productos_all()
     {
         
-        $products = Vehiculos::with('imagenprincipal')->paginate(16);
+        $products = Vehiculos::with('imagenprincipal')
+        ->where('activo', 'Activo')
+        ->orderBy('id_vehiculo', 'Desc')
+        ->paginate(16);
 
        return view('shop.productos_all', ['products' => $products]);
     }

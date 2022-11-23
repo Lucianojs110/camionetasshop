@@ -114,6 +114,8 @@
 
 	.ver-mas:hover p {
 		color: #fff;
+		position: absolute;
+		
 
 	}
 
@@ -131,6 +133,23 @@
 
 			margin-top: 60px;
 		}
+
+		.ver-mas p {
+		font-family: 'Mukta', sans-serif;
+		position: absolute;
+		top: -30%;
+		left: calc(50% - 13.5px);
+		z-index: 1;
+		color: #333;
+		transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+	}
+
+		.ver-mas:hover p {
+		color: #fff;
+		position: absolute;
+		top: -30%;
+
+	}
 
 
 
@@ -162,7 +181,12 @@
 							@endif
 							@endforeach
 							<div class="card-body">
-								<h3 style="color:#d43100; ">Us$
+								<h3 style="color:#d43100; ">
+								@if($p->moneda=='Pesos')
+								ARS$
+								@else
+								Us$
+								@endif
 									<?php echo number_format($p->precio, 0, ',', '.'); ?>
 								</h3>
 								<h6>{{$p->marca}} {{$p->modelo}} </h6>

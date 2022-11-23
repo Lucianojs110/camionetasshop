@@ -15,6 +15,13 @@
 	font-size: 13px;
 }
 
+.texto-danger{
+	color: white;
+	background-color: red;
+	padding: 5px;
+	font-size: 13px;
+}
+
 
 </style>
 
@@ -43,7 +50,8 @@
 										
 										<th>Versión</th>
 										<th>Año</th>
-										<th>Ubicacion</th>
+										<th>Creado por</th>
+										<th></th>
 										<th></th>
 										<th></th>
 										<th>Acciones</th>
@@ -60,7 +68,7 @@
 											<td>{{ $p->marca }} - {{ $p->modelo }}</td>
 											<td>{{ $p->version }}</td>
 											<td>{{ $p->año }}</td>
-											<td>{{ $p->ciudad }}-{{ $p->provincia }}</td>
+											<td>{{ $p->usuario->name }}</td>
 											<td>
 											@if($p->envio == 1)
 											<div class="texto-resaltado">Envío</div>
@@ -74,6 +82,19 @@
 											@else
 											<div></div>
 											@endif
+											</td>
+
+											<td>
+											@if($p->activo == 'Activo')
+											<div class="texto-destacado">
+											{{$p->activo }}
+											</div>
+											@else
+											<div class="texto-danger">
+											{{$p->activo }}
+											</div>
+											@endif
+											
 											</td>
 											<td align="center" style="width: 20%">
 												<form method="post" action="{{ URL::action('VehiculosController@destroy', $p->id_vehiculo) }}">

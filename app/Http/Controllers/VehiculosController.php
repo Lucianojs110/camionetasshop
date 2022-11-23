@@ -12,16 +12,26 @@ use App\Models\Imagenes;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
 use Session;
+use Illuminate\Support\Facades\Auth;
 
 class VehiculosController extends Controller
 {
     public function index()
     {
         /* $productos  = Productos::with('categoria')->get(); */
+        //dd(Auth::user()->role[0]['id']);
+        if(Auth::user()->role[0]['id']==1){
+            $producto = Vehiculos::with('imagenprincipal','categoria', 'cliente')
+            ->orderBy('id_vehiculo', 'DESC')
+            ->get();
+        }else{
 
-        $producto = Vehiculos::with('imagenprincipal','categoria', 'cliente')->get();
-       
-      
+            $producto = Vehiculos::with('imagenprincipal','categoria', 'cliente')
+            ->where('id_usuario', Auth::user()->id)
+            ->orderBy('id_vehiculo', 'DESC')
+            ->get();
+        }
+        
         return view('vehiculos.index', ['producto' => $producto]);
     }
 
@@ -56,6 +66,15 @@ class VehiculosController extends Controller
             }else{
                 $destacado = 0;
             }
+
+            if(Auth::user()->role[0]['name']=='Administrador'){
+                $activo = 'Activo';
+            }else{
+                $activo = 'Pausado';
+            }
+            //dd(Auth::user()->role[0]['name']);
+            $id_usuario = Auth::user()->id;
+
             $prod-> fill([
                     'id_categoria'=> $request->input('id_categoria'),
                     'id_cliente'=> $request->input('id_cliente'),
@@ -74,7 +93,12 @@ class VehiculosController extends Controller
                     'precio' => $request->input('precio'),
                     'precio_cliente' => $request->input('precio_cliente'),
                     'envio' => $envio,
-                    'destacado' => $destacado
+                    'destacado' => $destacado,
+                    'id_usuario' => $id_usuario,
+                    'activo' => $activo,
+                    'moneda' => $request->input('moneda'),
+
+
             ]);
             
             $prod->save();
@@ -176,6 +200,12 @@ class VehiculosController extends Controller
             $destacado = 0;
         }
 
+        if($request->input('activo')){
+            $activo = 'Activo';
+        }else{
+            $activo = 'Pausado';
+        }
+
         $prod-> fill([
             'id_categoria'=> $request->input('id_categoria'),
             'id_cliente'=> $request->input('id_cliente'),
@@ -194,7 +224,9 @@ class VehiculosController extends Controller
             'precio' => $request->input('precio'),
             'precio_cliente' => $request->input('precio_cliente'),
             'envio' => $envio,
-            'destacado' => $destacado
+            'destacado' => $destacado,
+            'activo' => $activo,
+            'moneda' => $request->input('moneda'),
         ]);
         $prod->save();
 
@@ -222,6 +254,13 @@ class VehiculosController extends Controller
                 foreach($request->File('ruta') as $imagen){
                 
                     $img = new Imagenes();
+
+
+                    if($request->input('imagen_destacada')){
+                        $destacado =  1;
+                    }else{
+                        $destacado = 0;
+                    }
 
                     $img-> fill([
                         'ruta' => 'storage/bm/'.$imagen->getClientOriginalName(),

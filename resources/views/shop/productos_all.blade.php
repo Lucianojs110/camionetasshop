@@ -89,7 +89,12 @@ height: 100%;
                         @endif
                         @endforeach
                         <div class="card-body">
-                            <h3 style="color:#d43100; ">Us$
+                            <h3 style="color:#d43100; ">
+                            @if($p->moneda=='Pesos')
+								ARS$
+							@else
+								Us$
+							@endif
                                 <?php echo number_format($p->precio, 0, ',', '.'); ?>
                             </h3>
                             <h6>{{$p->marca}} {{$p->modelo}} </h6>

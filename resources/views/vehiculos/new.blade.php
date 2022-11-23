@@ -88,7 +88,7 @@ input[type=checkbox]
                                 </div>
                             </div>
 
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                 <div class="form-group">
                                     <label class="form-check-label">Combustible</label>
                                     <select name="combustible" id="combustible" class="form-control">
@@ -114,6 +114,18 @@ input[type=checkbox]
                                     <div class="form-group">
                                         <label for="precio" class="form-check-label">Año (*)</label>
                                         <input type="number" name="año" id="año" value="{{ old('año') }}" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label for="moneda" class="form-check-label">Moneda (*)</label>
+                                        <select name="moneda" id="moneda" class="form-control">
+                                        <option value="Dolares">Dolares</option>
+                                        <option value="Pesos">Pesos</option>
+                                    </select>
                                     </div>
                                 </div>
                             </div>
@@ -198,8 +210,8 @@ input[type=checkbox]
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label for="descripcion" class="form-check-label">Descripción</label>
-                                        <textarea name="descripcion" id="descripcion" cols="30" rows="5" class="form-control"></textarea>
-
+                                        
+                                        <textarea class="form-control" id="summary-ckeditor" name="descripcion"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -285,9 +297,13 @@ input[type=checkbox]
 @endsection
 
 
+<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 @section('js')
 
 <script>
+
+    
+    CKEDITOR.replace( 'summary-ckeditor' );
     $('#filtroslista').select2({
         placeholder: "Filtros"
     });

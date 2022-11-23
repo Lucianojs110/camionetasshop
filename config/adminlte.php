@@ -245,34 +245,43 @@ return [
             'icon'        => 'fas fa-car', 
             'label_color' => 'success',
         ],
+       
         [
+  
             'text'        => 'Clientes',
             'url'         => 'admin/clientes',
             'icon'        => 'fas fa-users',
             'label_color' => 'success',
+            'can' => 'Administrador'
+        
         ],
+    
         [
             'text'        => 'Filtros',
             'url'         => 'admin/filtros',
             'icon'        => 'fas fa-filter',
             'label_color' => 'success',
+            'can' => 'Administrador'
         ],
         [
             'text'        => 'Categorías',
             'url'         => 'admin/categorias',
             'icon'        => 'fas fa-list',
             'label_color' => 'success',
+            'can' => 'Administrador'
         ],
         ['header' => 'ADMINISTRACION CUENTAS'],
         [
             'text' => 'Perfil',
-            'url'  => 'admin/perfil',
+            'url'  => 'admin/profile',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'Usuarios',
             'url'  => 'admin/usuarios',
             'icon' => 'fas fa-fw fa-users',
+            'can' => 'Administrador'
+        
         ],
         /*
         [
