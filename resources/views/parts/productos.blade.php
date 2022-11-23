@@ -162,7 +162,7 @@
 	<div class="single-product-slider @if($loop->first) active @endif">
 		<div class="container" id="container-prod">
 			<p align=center style="font-size:30px; color:#db3300">{{ $cat->nombre}}</p>
-			<br><br>
+			<br><br><br><br><br><br>
 			<div class="row">
 				<!-- single product -->
 				@foreach($cat->vehiculos as $p)
